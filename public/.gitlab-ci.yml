@@ -1,0 +1,32 @@
+stages:
+  - lint
+
+lint_html:
+  stage: lint
+  image: node:18
+  script:
+    - npm init -y
+    - npm install htmlhint --save-dev
+    - npx htmlhint index.html
+  only:
+    - main
+
+lint_css:
+  stage: lint
+  image: node:18
+  script:
+    - npm init -y
+    - npm install stylelint stylelint-config-standard --save-dev
+    - npx stylelint "styles.css" --config="{\"extends\": \"stylelint-config-standard\"}"
+  only:
+    - main
+
+lint_js:
+  stage: lint
+  image: node:18
+  script:
+    - npm init -y
+    - npm install eslint --save-dev
+    - npx eslint script.js
+  only:
+    - main
